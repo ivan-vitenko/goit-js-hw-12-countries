@@ -3,15 +3,9 @@ import '@pnotify/core/dist/BrightTheme.css';
 import countriesListTemplate from './templates/countries-list.hbs';
 import countryTemplate from './templates/country.hbs';
 import CountriesApiService from './js/fetchCountries';
+import { alert, notice, info, success, error } from '@pnotify/core';
 
-import { alert, defaultModules } from '@pnotify/core';
-import '@pnotify/core/dist/PNotify.css';
-import * as PNotifyMobile from '@pnotify/mobile';
-import '@pnotify/mobile/dist/PNotifyMobile.css';
-
-defaultModules.set(PNotifyMobile, {});
-
-const Debounce = require('lodash.debounce');
+import Debounce from 'lodash.debounce';
 
 const countriesApiService = new CountriesApiService();
 
@@ -45,12 +39,17 @@ function removeOldElement(element) {
 
 function createCountriesList(countriesList) {
   if (countriesList.length > 10) {
-    alert('Результат пошуку надто великий. Зробіть запит більш унікальним!');
+    error({
+      text: 'Результат пошуку надто великий. Зробіть запит більш унікальним!',
+    });
     return;
   }
 
   if (countriesList.length === 1) {
     refs.bodyEl.insertAdjacentHTML('beforeend', countryTemplate(countriesList));
+    success({
+      text: 'Ура! Країну знайдено :)',
+    });
     return;
   }
 
@@ -58,4 +57,7 @@ function createCountriesList(countriesList) {
     'beforeend',
     countriesListTemplate(countriesList),
   );
+  info({
+    text: 'Виведено список країн за запитом.',
+  });
 }

@@ -4,11 +4,9 @@ export default class CountriesApiService {
   }
 
   fetchCountries() {
-    return fetch(`https://restcountries.eu/rest/v2/name/${this.searchQuery}`)
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
+    return fetch(
+      `https://restcountries.eu/rest/v2/name/${this.searchQuery}`,
+    ).then(response => response.json());
   }
 
   get query() {
