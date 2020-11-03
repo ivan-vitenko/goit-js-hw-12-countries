@@ -4,6 +4,7 @@ import countriesListTemplate from './templates/countries-list.hbs';
 import countryTemplate from './templates/country.hbs';
 import CountriesApiService from './js/fetchCountries';
 import { alert, notice, info, success, error } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
 
 import Debounce from 'lodash.debounce';
 
